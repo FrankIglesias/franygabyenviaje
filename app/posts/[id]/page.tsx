@@ -15,18 +15,17 @@ async function getData(id) {
 
   const response = await client.getByID(id);
   const post = response.data;
-  return post;
+  return { ...post, date: response.first_publication_date, response };
 }
 
 export async function generateMetadata({ params }) {
   const post = await getData(params.id);
-
   return {
     title: `Fran y Gaby en Viaje - ${RichText.asText(post.title)}`
   };
 }
 
-export default async function BlogPost({ params }) {
+export default async function Post({ params }) {
   const post = await getData(params.id);
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
@@ -43,6 +42,14 @@ export default async function BlogPost({ params }) {
           {RichText.asText(post.title)}
         </h1>
         <div className="max-w-4xl m-x-auto self-center w-full text-justify pb-6">
+          <p className="text-right mb-2 italic">
+            {new Date(post.date).toLocaleDateString("es", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            })}
+          </p>
           {RichText.render(post.content)}
         </div>
       </div>

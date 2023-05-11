@@ -15,9 +15,13 @@ export default async function Home() {
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-6 sm:px-20 text-center min-h-screen py-6">
       <section className="flex flex-col bg-white bg-opacity-70 p-8 mb-8 shadow-sm">
-        <h1 className="text-6xl font-bold">Fran y Gaby en Viaje</h1>
-
-        <p className="mt-3 text-2xl mb-8">
+        <Image
+          src="/logo.svg"
+          height={400}
+          width={400}
+          className="self-center"
+        />
+        <p className="mt-3 text-2xl mb-4">
           ¡Somos Gaby y Fran y nos encanta viajar! En este blog te compartimos
           nuestras aventuras, consejos de viaje y trámites útiles.
         </p>
