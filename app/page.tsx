@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
-import { createClient } from "../prismicio";
+import { createClient } from "../services/prismicio";
 import Image from "next/image";
 
 async function getData() {
@@ -14,7 +14,7 @@ export default async function Home() {
   const blogPosts = await getData();
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-6 sm:px-20 text-center min-h-screen py-6">
-      <section className="flex flex-col bg-white bg-opacity-70 p-8 mb-8 shadow-sm">
+      <section className="flex flex-col bg-white bg-opacity-70 p-8 mb-8 shadow-sm pt-0">
         <Image
           src="/logo.svg"
           height={400}
@@ -27,30 +27,27 @@ export default async function Home() {
         </p>
       </section>
       <section className="w-full">
-        <h2 className="text-4xl font-bold mb-4">Sobre nosotros</h2>
-        <div className="flex flex-col items-center justify-center mb-4">
-          <div className="overflow-hidden h-36 w-36 rounded-full mb-3">
+        <h2 className="text-4xl font-bold mb-4">¿Quienes somos?</h2>
+        <div className="flex flex-col sm:flex-row items-center my-4 justify-center">
+          <div className="overflow-hidden h-44 w-44 rounded-full sm:mr-6 sm:mb-0 mb-4">
             <Image
               src="/us.jpeg"
               alt="Foto de perfil"
-              width={200}
-              height={200}
+              width={250}
+              height={250}
             />
           </div>
-          <h3 className="text-xl font-bold mb-1">Fran y Gaby</h3>
-          <p className="text-gray-500 max-w-3xl">
+          <p className="text-gray-500 max-w-xl w-full">
             Somos una pareja de aventureros que decidió viajar desde Argentina
             para empezar una aventura en Toulouse, sur de Francia. Nos encanta
             viajar, conocer nuevas culturas y probar nuevos platos (Spoiler
-            alert: somos vegetarianos, las comidas recomendadas serán veggies).
-            En este blog compartimos nuestras experiencias, consejos de viaje y
-            los ayudaremos (o al menos lo vamos a intentar) en los trámites
-            iniciales que hay que hacer al llegar a Francia. Esperamos que les
-            guste!
+            alert: somos vegetarianos). En este blog compartimos nuestras
+            experiencias, consejos de viaje y los ayudaremos (o al menos lo
+            vamos a intentar) en algunos trámites (por ejemplo los que hay que
+            hacer al llegar a Francia). Esperamos que les guste!
           </p>
         </div>
       </section>
-
       <div className="mt-10 w-full">
         <h2 className="text-4xl font-bold mb-4">Nuestros posts</h2>
         <div className="flex flex-wrap items-center mt-6 sm:w-full">
