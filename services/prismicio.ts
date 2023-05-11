@@ -4,7 +4,8 @@ import config from "../slicemachine.config.json";
 
 export const repositoryName = config.repositoryName;
 export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
-  const client = prismic.createClient(repositoryName, {
+  const client = prismic.createClient(process.env.PRISMIC_REPOSITORY, {
+    accessToken: process.env.PRISMIC_TOKEN,
     ...config,
   });
 
