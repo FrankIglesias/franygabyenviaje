@@ -55,8 +55,8 @@ export default async function Home() {
               <div className="w-full max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white">
                 <div className="relative h-48">
                   <Image
-                    src={post.data.cover.url}
-                    alt={post.data.cover.alt}
+                    src={post.data.cover.url!}
+                    alt={post.data.cover.alt!}
                     layout="fill"
                     objectFit="cover"
                   />

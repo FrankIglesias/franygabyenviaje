@@ -3,16 +3,11 @@ import { RichText } from "prismic-reactjs";
 import { createClient } from "../../../prismicio";
 import Image from "next/image";
 
-export async function getStaticPaths() {
+export async function generateStaticParams() {
   const client = createClient();
   const pages = await client.getAllByType("post");
-  const paths = pages.map((page) => ({
-    params: { id: page.id }
-  }));
-  return {
-    paths,
-    fallback: false
-  };
+  const ids = pages.map((page) => ({ id: page.id }));
+  return ids;
 }
 
 async function getData(id) {
