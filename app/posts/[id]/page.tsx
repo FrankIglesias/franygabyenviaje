@@ -1,5 +1,5 @@
 import { RichText } from "prismic-reactjs";
-import { createClient } from "../../../services/prismicio";
+import { createClient } from "@/services/prismicio";
 import Image from "next/image";
 
 export async function generateStaticParams() {
