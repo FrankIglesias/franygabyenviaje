@@ -1,10 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from './Footer';
-
+import Footer from "./footer";
+import * as amplitude from "@amplitude/analytics-browser";
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const metadata: Metadata = {
   title: "Fran y Gaby en Viaje",
@@ -20,6 +19,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  amplitude.init(process.env.AMPLITUDE_KEY, undefined, {
+    defaultTracking: {
+      sessions: true,
+      pageViews: true,
+      formInteractions: true,
+      fileDownloads: true
+    }
+  });
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
