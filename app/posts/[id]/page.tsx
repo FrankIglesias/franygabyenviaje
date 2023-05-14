@@ -4,17 +4,26 @@ import Image from "next/image";
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("post");
-  const ids = pages.map((page) => ({ id: page.id }));
-  return ids;
+  try {
+    const pages = await client.getAllByType("post");
+    const ids = pages.map((page) => ({ id: page.id }));
+    return ids;
+  } catch {
+    Sentry.captureException("Error ids for static page generation");
+    return [];
+  }
 }
 
 async function getData(id) {
   const client = createClient();
-
-  const response = await client.getByID(id);
-  const post = response.data;
-  return { ...post, date: response.first_publication_date, response };
+  try {
+    const response = await client.getByID(id);
+    const post = response.data;
+    return { ...post, date: response.first_publication_date, response };
+  } catch {
+    Sentry.captureException("Error fetching data from Post Details page");
+    return {};
+  }
 }
 
 export async function generateMetadata({ params }) {

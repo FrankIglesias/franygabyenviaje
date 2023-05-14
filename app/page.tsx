@@ -3,11 +3,17 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 import { createClient } from "@/services/prismicio";
 import Image from "next/image";
+import * as Sentry from "@sentry/nextjs";
 
 async function getData() {
   const client = createClient();
-  const pages = await client.getAllByType("post");
-  return pages;
+  try {
+    const pages = await client.getAllByType("post");
+    return pages;
+  } catch {
+    Sentry.captureException("Error fetching posts for homepage");
+    return [];
+  }
 }
 
 export default async function Home() {
