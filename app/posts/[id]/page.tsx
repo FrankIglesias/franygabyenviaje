@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { RichText } from "prismic-reactjs";
 import { createClient } from "../../../services/prismicio";
 import Image from "next/image";
@@ -29,6 +28,40 @@ export default async function Post({ params }) {
   const post = await getData(params.id);
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `     
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": ${RichText.asText(post.title)},
+            "image": "https://www.example.com/images/post-image.jpg",
+            "datePublished": ${post.date},
+            "dateModified": ${post.date},
+            "author": {
+              "@type": "Person",
+              "name": "Gabriela Neira Gastien & Francisco Iglesias"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Fran y Gaby en Viaje",
+              // "logo": {
+              //   "@type": "ImageObject",
+              //   "url": "https://www.example.com/images/logo.png",
+              //   "width": 600,
+              //   "height": 60
+              // }
+            },
+            "description": "Descripción breve del post",
+            "articleBody": "Contenido completo del post en formato HTML",
+            "keywords": [
+              "Viajar",
+              "Toulouse",
+            ]
+          }`
+        }}
+      ></script>
       <div className="flex flex-col">
         <div className="mb-4 h-64 overflow-y-hidden relative">
           <Image

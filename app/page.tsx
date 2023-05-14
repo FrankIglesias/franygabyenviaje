@@ -14,6 +14,20 @@ export default async function Home() {
   const blogPosts = await getData();
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-6 sm:px-20 text-center min-h-screen py-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Fran y Gaby en viaje",
+            "description": "Explorando el mundo con Fran y Gaby",
+            "url": "https://www.franygabyenviaje.com",
+          }
+          `
+        }}
+      ></script>
       <section className="flex flex-col bg-white bg-opacity-70 p-8 mb-8 shadow-sm pt-0">
         <Image
           src="/logo.svg"
